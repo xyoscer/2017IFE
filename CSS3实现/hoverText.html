@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现鼠标悬浮模糊效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 500px;
+            height: 360px;
+            margin-left: -250px;
+            margin-top: -130px;
+            background: url(pic1.jpg);
+
+        }
+
+        .box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 400px;
+            height: 300px;
+            margin-left: -200px;
+            margin-top: -150px;
+            border-color: transparent;
+
+        }
+
+        .box p {
+            position: relative;
+            text-align: center;
+            line-height: 30px;
+            font-size: 24px;
+
+        }
+
+        p {
+
+            /*设置渐变背景，最好设置为能无缝拼接的渐变*/
+            background-image: -webkit-linear-gradient(left, yellow, pink 25%, yellow 50%, pink 75%, yellow 100%);
+            /*文字填充色为透明*/
+            -webkit-text-fill-color: transparent;
+            /*背景剪裁为文字，相当于用背景填充文字*/
+            -webkit-background-clip: text;
+            /*将背景拉长一倍，给予移动变化空间，用作流光效果*/
+            -webkit-background-size: 200% 100%;
+
+        }
+
+        @-webkit-keyframes light {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -100% 0;
+            }
+        }
+
+        .box:hover p {
+            animation: light 3s linear infinite;
+        }
+
+        .box > p {
+            top: 0;
+            opacity: 0;
+            transition: opacity 1s ease, top 1s ease;
+        }
+
+        .box:hover p {
+            top: 100px;
+            opacity: 1;
+        }
+
+        .box:hover {
+            border-top: 3px solid #fff;
+            border-left: 3px solid #fff;
+            border-bottom: 3px solid #fff;
+            border-right: 3px solid #fff;
+            transition: border-top 1s ease 0s, border-left 1s ease 1s, border-right 1s ease 1s, border-bottom 1s ease 2s;
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <p>欢迎来到这里</p>
+        <p>点击报名</p>
+    </div>
+</div>
+
+</body>
+</html>
